@@ -19,6 +19,14 @@ class Shop {
             item.sellIn < 0 ? item.quality += 2 : item.quality += 1
           }
           break
+        case 'Backstage passes to a TAFKAL80ETC concert':
+          item.sellIn -= 1
+          if (item.quality < 50 && item.sellIn >= 0) {
+            item.quality += this.calculateBackstage(item.sellIn)
+          } else if (item.sellIn < 0) {
+            item.quality = 0
+          }
+          break
       }
     })
 
@@ -71,6 +79,16 @@ class Shop {
     // }
 
     return this.items;
+  }
+
+  calculateBackstage(sellIn) {
+    if (sellIn > 10) {
+      return 1
+    } else if (sellIn > 5) {
+      return 2
+    } else {
+      return 3
+    }
   }
 }
 
