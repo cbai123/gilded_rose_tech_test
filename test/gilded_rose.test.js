@@ -1,9 +1,37 @@
 const {Shop, Item} = require("../src/gilded_rose");
 
 describe("Gilded Rose", function() {
-  it("should foo", function() {
-    const gildedRose = new Shop([new Item("foo", 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe("fixme");
-  });
+  describe("a normal item", () => {
+    it("should foo", function() {
+      const gildedRose = new Shop([new Item("foo", 0, 0)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).toBe("foo");
+    });
+
+    it("should update the sell in", () => {
+      const gildedRose = new Shop([new Item("foo", 10, 10)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(9)
+    })
+
+    it("should update the quality", () => {
+      const gildedRose = new Shop([new Item("foo", 10, 10)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(9)
+    })
+
+    it("quality should decrease by 2 after sell in < 0", () => {
+      const gildedRose = new Shop([new Item("foo", 0, 10)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(8)
+    })
+
+    it("quality should not decrease past 0", () => {
+      const gildedRose = new Shop([new Item("foo", 10, 0)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(0)
+    })
+  })
+
+  
 });
