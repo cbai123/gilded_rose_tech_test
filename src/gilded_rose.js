@@ -9,30 +9,22 @@ class Item {
 class Shop {
   constructor(items=[]){
     this.items = items;
+    this.ruleset = {
+      'Aged Brie': new AgedBrie(),
+      'Backstage passes to a TAFKAL80ETC concert': new BackstagePass(),
+      'Conjured': new Conjured(),
+      'default': new NormalItem
+    }
   }
+  
   updateQuality() {
     this.items.forEach(item => {
-      switch (item.name) {
-        case 'Aged Brie':
-          new AgedBrie().update(item)
-          break
-        case 'Backstage passes to a TAFKAL80ETC concert':
-          new BackstagePass().update(item)
-          break
-        case 'Sulfuras, Hand of Ragnaros':
-          break
-        case 'Conjured':
-          new Conjured().update(item)
-          break
-        default:
-          new NormalItem().update(item)
+      if (item.name !== 'Sulfuras, Hand of Ragnaros') {
+        (this.ruleset[item.name] || this.ruleset['default']).update(item)
       }
-
-      if (item.quality < 0) {
-        item.quality = 0
-      } else if (item.quality > 50) {
-        item.quality = 50
-      }
+      
+      item.quality < 0 ? item.quality = 0 :
+      item.quality > 50 ? item.quality = 50 : item.quality
     })
 
     return this.items;
