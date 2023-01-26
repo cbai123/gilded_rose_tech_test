@@ -22,12 +22,9 @@ class Shop {
         case 'Sulfuras, Hand of Ragnaros':
           break
         case 'Conjured':
-          item.sellIn -= 1
-          this.normalItem(item)
-          this.normalItem(item)
+          this.conjured(item)
           break
         default:
-          item.sellIn -= 1
           this.normalItem(item)
       }
 
@@ -68,9 +65,17 @@ class Shop {
   }
 
   normalItem(item) {
+    item.sellIn -=1
     if (item.quality > 0 ) {
       item.sellIn >=0 ? item.quality -= 1 : item.quality -= 2
     }
+  }
+
+  conjured(item) {
+    for( let i = 0 ; i < 2 ; i ++ ) {
+      this.normalItem(item)
+    }
+    item.sellIn += 1
   }
 }
 

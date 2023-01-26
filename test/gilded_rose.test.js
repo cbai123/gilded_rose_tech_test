@@ -63,6 +63,12 @@ describe('Gilded Rose', function() {
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(50)
     })
+
+    it('should not increase quality past 50 if starts at 49 and sellIn < 0', () => {
+      const gildedRose = new Shop([new Item('Aged Brie', -3, 49)])
+      const items = gildedRose.updateQuality()
+      expect(items[0].quality).toBe(50)
+    })
   })
 
   describe('Sulfuras, Hand of Ragnaros', () => {
@@ -139,6 +145,12 @@ describe('Gilded Rose', function() {
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(50)
     })
+
+    it('should not increase quality past 50 when starting near 50', () => {
+      const gildedRose = new Shop([new Item('Backstage passes to a TAFKAL80ETC concert', 3, 49)])
+      const items = gildedRose.updateQuality()
+      expect(items[0].quality).toBe(50)
+    })
   })
 
   describe('Conjured', () => {
@@ -164,6 +176,12 @@ describe('Gilded Rose', function() {
       const gildedRose = new Shop([new Item('Conjured', -1, 10)])
       const items = gildedRose.updateQuality()
       expect(items[0].quality).toBe(6)
+    })
+
+    it('should not decrease the quality below 0 when starting near 0', () => {
+      const gildedRose = new Shop([new Item('Conjured', -1, 1)])
+      const items = gildedRose.updateQuality()
+      expect(items[0].quality).toBe(0)
     })
   })
 
