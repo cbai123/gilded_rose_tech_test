@@ -156,5 +156,35 @@ describe('Gilded Rose', function() {
       expect(items[2].name).toBe('Sulfuras, Hand of Ragnaros')
       expect(items[3].name).toBe('foo')
     })
+
+    it('should update the sellIn unless Sulfuras', () => {
+      const array = [
+        new Item('Aged Brie', 10, 10), 
+        new Item('Backstage passes to a TAFKAL80ETC concert', 10, 10),
+        new Item('Sulfuras, Hand of Ragnaros', 10, 10),
+        new Item('foo', 10, 10)
+      ]
+      const gildedRose = new Shop(array)
+      const items = gildedRose.updateQuality()
+      expect(items[0].sellIn).toBe(9)
+      expect(items[1].sellIn).toBe(9)
+      expect(items[2].sellIn).toBe(10)
+      expect(items[3].sellIn).toBe(9)
+    })
+
+    it('should update the quality accordingly', () => {
+        const array = [
+          new Item('Aged Brie', 10, 10), 
+          new Item('Backstage passes to a TAFKAL80ETC concert', 3, 10),
+          new Item('Sulfuras, Hand of Ragnaros', 10, 10),
+          new Item('foo', 10, 0)
+        ]
+        const gildedRose = new Shop(array)
+        const items = gildedRose.updateQuality()
+        expect(items[0].quality).toBe(11)
+        expect(items[1].quality).toBe(13)
+        expect(items[2].quality).toBe(10)
+        expect(items[3].quality).toBe(0)
+    })
   })
 });
