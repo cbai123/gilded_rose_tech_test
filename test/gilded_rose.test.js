@@ -58,4 +58,24 @@ describe('Gilded Rose', function() {
       expect(items[0].quality).toBe(50)
     })
   })
+
+  describe('Sulfuras, Hand of Ragnaros', () => {
+    it('should return Sulfuras, Hand of Ragnaros', () => {
+      const gildedRose = new Shop([new Item('Sulfuras, Hand of Ragnaros', 10, 10)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].name).toBe('Sulfuras, Hand of Ragnaros')
+    })
+
+    it('should not decrease sellIn', () => {
+      const gildedRose = new Shop([new Item('Sulfuras, Hand of Ragnaros', 10, 10)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(10)
+    })
+
+    it('should not decrease quality', () => {
+      const gildedRose = new Shop([new Item('Sulfuras, Hand of Ragnaros', 10, 10)]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(10)
+    })
+  })
 });
