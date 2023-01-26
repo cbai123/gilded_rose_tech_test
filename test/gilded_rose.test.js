@@ -141,6 +141,32 @@ describe('Gilded Rose', function() {
     })
   })
 
+  describe('Conjured', () => {
+    it('should retrieve the right name', () => {
+      const gildedRose = new Shop([new Item('Conjured', 10, 10)])
+      const items = gildedRose.updateQuality()
+      expect(items[0].name).toBe('Conjured')
+    })
+
+    it('should decrease the sellIn by 1', () => {
+      const gildedRose = new Shop([new Item('Conjured', 10, 10)])
+      const items = gildedRose.updateQuality()
+      expect(items[0].sellIn).toBe(9)
+    })
+
+    it('should decrease the quality by 2 when sellIn >= 0', () => {
+      const gildedRose = new Shop([new Item('Conjured', 10, 10)])
+      const items = gildedRose.updateQuality()
+      expect(items[0].quality).toBe(8)
+    })
+
+    it('should decrease the quality by 4 when sellIn < 0', () => {
+      const gildedRose = new Shop([new Item('Conjured', -1, 10)])
+      const items = gildedRose.updateQuality()
+      expect(items[0].quality).toBe(6)
+    })
+  })
+
   describe('multiple Items added into Shop', () => {
     it('should retrieve the right names', () => {
       const array = [
