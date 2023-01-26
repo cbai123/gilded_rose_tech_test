@@ -1,5 +1,6 @@
 # Gilded Rose
 
+The starting point for this was taken from https://github.com/emilybache/GildedRose-Refactoring-Kata.git
 This is the Gilded Rose kata in JavaScript with Jest
 
 ## Getting started
