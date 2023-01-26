@@ -14,18 +14,18 @@ class Shop {
     this.items.forEach(item => {
       switch (item.name) {
         case 'Aged Brie':
-          this.agedBrie(item)
+          new AgedBrie().update(item)
           break
         case 'Backstage passes to a TAFKAL80ETC concert':
-          this.backstagePasses(item)
+          new BackstagePass().update(item)
           break
         case 'Sulfuras, Hand of Ragnaros':
           break
         case 'Conjured':
-          this.conjured(item)
+          new Conjured().update(item)
           break
         default:
-          this.normalItem(item)
+          new NormalItem().update(item)
       }
 
       if (item.quality < 0) {
@@ -37,24 +37,28 @@ class Shop {
 
     return this.items;
   }
+}
 
-  agedBrie(item) {
+class AgedBrie {
+  update(item) {
     item.sellIn -= 1
     if (item.quality < 50) {
       item.sellIn < 0 ? item.quality += 2 : item.quality += 1
     }
   }
-  
-  backstagePasses(item) {
+}
+
+class BackstagePass {
+  update(item) {
     item.sellIn -= 1
     if (item.quality < 50 && item.sellIn >= 0) {
-      item.quality += this.calculateBackstage(item.sellIn)
+      item.quality += this.calculateQuality(item.sellIn)
     } else if (item.sellIn < 0) {
       item.quality = 0
     }
   }
 
-  calculateBackstage(sellIn) {
+  calculateQuality(sellIn) {
     if (sellIn > 10) {
       return 1
     } else if (sellIn > 5) {
@@ -63,17 +67,21 @@ class Shop {
       return 3
     }
   }
+}
 
-  normalItem(item) {
+class NormalItem {
+  update(item) {
     item.sellIn -=1
     if (item.quality > 0 ) {
       item.sellIn >=0 ? item.quality -= 1 : item.quality -= 2
     }
   }
+}
 
-  conjured(item) {
+class Conjured {
+  update(item) {
     for( let i = 0 ; i < 2 ; i ++ ) {
-      this.normalItem(item)
+      new NormalItem().update(item)
     }
     item.sellIn += 1
   }
