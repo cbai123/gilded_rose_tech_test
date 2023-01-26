@@ -14,18 +14,10 @@ class Shop {
     this.items.forEach(item => {
       switch (item.name) {
         case 'Aged Brie':
-          item.sellIn -= 1
-          if (item.quality < 50) {
-            item.sellIn < 0 ? item.quality += 2 : item.quality += 1
-          }
+          this.agedBrie(item)
           break
         case 'Backstage passes to a TAFKAL80ETC concert':
-          item.sellIn -= 1
-          if (item.quality < 50 && item.sellIn >= 0) {
-            item.quality += this.calculateBackstage(item.sellIn)
-          } else if (item.sellIn < 0) {
-            item.quality = 0
-          }
+          this.backstagePasses(item)
           break
         case 'Sulfuras, Hand of Ragnaros':
           break
@@ -38,6 +30,22 @@ class Shop {
     })
 
     return this.items;
+  }
+
+  agedBrie(item) {
+    item.sellIn -= 1
+    if (item.quality < 50) {
+      item.sellIn < 0 ? item.quality += 2 : item.quality += 1
+    }
+  }
+  
+  backstagePasses(item) {
+    item.sellIn -= 1
+    if (item.quality < 50 && item.sellIn >= 0) {
+      item.quality += this.calculateBackstage(item.sellIn)
+    } else if (item.sellIn < 0) {
+      item.quality = 0
+    }
   }
 
   calculateBackstage(sellIn) {
