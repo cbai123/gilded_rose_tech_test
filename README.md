@@ -49,4 +49,6 @@ I refactored again to make each item a class containing an update method, this w
 
 I split the different items up into classes to reduce the length of the Shop class. It also helped when I created an extra method to calculate part of the rules, such as for the backstage passes item, I could add another method to the backstage passes class and it was clear what the method was for.
 
-The choosing between item rules is handled by an object literal, this reduced the space taken up by the nested ifs, and the switch statement, and made it easier to see what was going on. These combined led to it being easy to add a new item. Simply create a new class for this item with an update method containing the rules for updating quality, then add this to the object in updateQuality.
+The choosing between item rules is handled by an object literal, this reduced the space taken up by the nested ifs, and the switch statement, and made it easier to see what was going on. These combined led to it being easy to add a new item. Simply create a new class for this item with an update method containing the rules for updating quality, then add this to the object in updateQuality. 
+
+At the moment an itemTag of the first word of the item name is put in the object. If an item was introduced to the shop that shared the same first word, e.g. another 'Aged ' item, it would be necessary to refactor. In this tech test it is not possible to change the Item class but if possible in the future adding an itemID property to the class could make it easy to uniquely identify items.
