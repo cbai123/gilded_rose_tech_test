@@ -43,7 +43,7 @@ To start with I began writing tests for the existing code to understand how it w
 
 I refactored the existing code to remove all the nested if statements. I did this by seperating each item into its own method, with its set of rules, and choosing which one to use through a switch statement. After this was working I wrote tests for the new 'Conjured' item. I then added the code for the rules of the conjured item by adding a new method and new case in the switch statement.
 
-I refactored again to make each item a class containing an update method, this was to tidy up the Shop class and avoid it becoming long and bloated. When this was passing all the tests I refactored again to remove the switch statement in favour of an object literal to reduce the number of lines in the updateQuality method and make it read better.
+I refactored again to make each item a class containing an update method, this was to tidy up the Shop class and avoid it becoming long and bloated. When this was passing all the tests I refactored again to remove the switch statement in favour of an object literal to reduce the number of lines in the updateQuality method and make it read better. The method creates an itemTag from the first word of the item, e.g. 'Conjured Mana Cake' gives an itemTag of 'Conjured' this is what is used as the key in the object.
 
 ## Code Structure
 
