@@ -13,7 +13,7 @@ class Shop {
       'Aged Brie': new AgedBrie(),
       'Backstage passes to a TAFKAL80ETC concert': new BackstagePass(),
       'Conjured': new Conjured(),
-      'default': new NormalItem
+      'default': new NormalItem()
     }
   }
   
