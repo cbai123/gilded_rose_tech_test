@@ -19,7 +19,9 @@ class Shop {
   
   updateQuality() {
     this.items.forEach(item => {
-      if (item.name !== 'Sulfuras, Hand of Ragnaros') {
+      if (item.name.includes('Conjured')) {
+        this.ruleset['Conjured'].update(item)
+      } else if (item.name !== 'Sulfuras, Hand of Ragnaros') {
         (this.ruleset[item.name] || this.ruleset['default']).update(item)
       }
       
